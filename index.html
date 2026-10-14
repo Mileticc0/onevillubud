@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One Villa Ubud · Singakerta, Bali</title>
+<script>
+/* =====================================================================
+   CONFIG — change only this object to adapt the site to a new villa.
+   Text fields with { en, de, it } are translated per language.
+   ===================================================================== */
+const CONFIG = {
+  name: "One Villa Ubud",
+  unitName: "Private Villa",
+  place: "Ubud",
+  country: { en: "Bali, Indonesia" },
+  tagline: { en: "A private villa with a pool in Singakerta, a quiet village south of Ubud" },
+  about: { en: [
+    "One Villa Ubud is in Singakerta, a quiet village south of central Ubud. Palms and rice fields are all around, and town is a short drive away.",
+    "The villa is yours. You get a private pool, a garden, a kitchen and air conditioning.",
+    "The host is local and answers on WhatsApp. Ask about drivers, tours or anything you need for your stay."
+  ] },
+  guests: 2,                   // please verify
+  bedrooms: 1,                 // please verify
+  bathrooms: 1,                // please verify
+  beachDistance: "~5 km",      // shown as "to Ubud centre"
+  priceFrom: 72,               // per night, from Google listing
+  currency: "USD",
+  platformCommission: 0.18,
+  defaultNights: 7,
+  amenities: [
+    { icon: "pool",    label: { en: "Private pool" } },
+    { icon: "garden",  label: { en: "Tropical garden" } },
+    { icon: "kitchen", label: { en: "Kitchen" } },
+    { icon: "ac",      label: { en: "Air conditioning" } }
+  ],
+  distances: [
+    { label: { en: "Monkey Forest Ubud" },  value: "~4 km" },
+    { label: { en: "ARMA Museum" },         value: "~4 km" },
+    { label: { en: "Ubud Palace" },         value: "~5 km" },
+    { label: { en: "Ubud Art Market" },     value: "~5 km" },
+    { label: { en: "Campuhan Ridge Walk" }, value: "~6 km" },
+    { label: { en: "Bali Airport (DPS)" },  value: "~35 km" }
+  ],
+  rooms: [
+    { name: { en: "Private villa" }, guests: 2, price: 72 }
+  ],
+  bookedDates: [],             // add real booked nights: ["2026-11-01","2026-11-05"]
+  phone: "+62 813-5996-577",
+  whatsapp: "628135996577",
+  email: "",
+  map: { lat: -8.5261804, lng: 115.2365147, zoom: 16 },
+  images: {
+    hero: "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Sbt13G-U549NDNiYRJ-GOvp_rq_T9vkxQkRpcxLcjDk0q7UZNxHCseGc69Fz1gbwEhaBfS1X093SC0vXgK42X7HHX-twoQRsz8pjHPdcHz9_0Nqcp-EvV-x85U7xIqx5Q9iaDD5Yn4u9Br=w2400-h1600-k-no",
+    about: "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RnUO7-aju5aRL7jgnXUNeqf2kMjt4bjIkVRsXhQ-qIPvtWDkXq7VlhFw2mb1q9K3-0R2O4BWvhmExI54sbr0kLN5kql5VNhXB8BzS1k6Vy4f8u_EEf6JEZiK9vp0Z1TAbF9STN61S9AjcG=w1200-h1500-k-no",
+    gallery: [
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Sbt13G-U549NDNiYRJ-GOvp_rq_T9vkxQkRpcxLcjDk0q7UZNxHCseGc69Fz1gbwEhaBfS1X093SC0vXgK42X7HHX-twoQRsz8pjHPdcHz9_0Nqcp-EvV-x85U7xIqx5Q9iaDD5Yn4u9Br=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RnUO7-aju5aRL7jgnXUNeqf2kMjt4bjIkVRsXhQ-qIPvtWDkXq7VlhFw2mb1q9K3-0R2O4BWvhmExI54sbr0kLN5kql5VNhXB8BzS1k6Vy4f8u_EEf6JEZiK9vp0Z1TAbF9STN61S9AjcG=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9S96BBzlCMD9U3epf488bOlTr4pGi4O2oitPBrZWIKoaKF-RTlw2xVjFiJjci7QRrdXOJQfn2SNIW6D-mp04pxf9R9QB2_kyquO2RPc1x-VXe-EPEL2m2AUEjwbfHqh1bVhcMR3TFwJX_DF=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q4Be_QAsUStZrcgZ0mWPObMnLEorzOn2lwuptltL5c33ZUrkiitjdas6RKmb3NcOLV_NIB8jW6CWJxGbyKOSb246YV2ZAZESKeu3myh9CZz4NNXOrenRrgV_ryn96EkU3qkx1w5-q-tpyk=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q19wRZXzuj4S11023ypXi77R2b0v190QLbvr340KVkdWuSrlT3w--VnJphdDEs2kKDTWtfaoe5f6nDop34RUwTWAhMj45pwBY2PIV1ZGSkZnGuue4Ub5YpCbU9uBj0ivZkDmi3CHQEgeHy=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T3QqWLyvdpXNV2adziZBe0gXNS7OyWdWgc_QYLmq-yf3pfLyTXYlP8A6EHa06C1E1nqrZSTjC6YLUn7Y31vIeLRuVjTTEYyUJvbHtapXktQe6dBC-P6B7KLejDitSU5oe5STTa6O9VEy0=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9TEunUqPnJsLv3b_-hU3L4v90q1r4_M6GdwL14UdRoTS0Su4peUys8Ljac6_Q_x8GOLxDzG8FUsUuE6BfMsbhxAxnRc8CRZkrIpAzJmCvnuqZ_XgjUJ8W86baFi3pV5CTaORVdjJF7ulUIm=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9S4LXbuwzhFINXq4g-7vFL6CamarkjKb9cnAG76LKftdEPeUP1UH4zMoI0BW57SRexyXf6hQjT57JWN7kfwB5CnqSStW3AWRZkpdyF5wLxw2Yv79wp_IMmFdAp4ZJyklokQPzSOHpft98-n=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Sj-Y_RazIiL5T9TFx1OstNoYi2L1sc7RN1YVxe9J-wdixv528ckHV9rdgXKWR6wVwWRIC2wnhEUiMI8y6Ksv88dMtvNvCm_AYzOYQPaUd7w1K4DAJkAvx9nGKih_T0Pdi2lrj7AI-kRtS3=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RPgn7RqJhV8JCVUmrwcFY3iH2QYui6JUKSnlJ6wuNZ4vicKWbM_YPH-y_YGKHq-_SbqrzpzZxnxnnCR1c3JCJu0RRAQR-OSHjnmtpdpFmM954oqeX1HMMzDUmOJam9IZEk_PMmIdGnURY=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QcOL-Moa0QYCTwJnEWTct8_oBsPSuMZhLXR7Z3Te3AZ-ilyO5Jsgf4ERd5DsG90v6bxWKNDfYOsTkp4uRI7Fxp_7CImMqiu3agRSSsQThFPGtDR5gRFipqqRFFGK8ObyP07HaMeMHPkt2o=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SvcuWCRcn_oZOqRgK8gfV-IFgYABgdH6vxUvBkaZcth3WQgkYJ0YgHOdFNAheyKpxBfIthqurOP8UrXpIPifvIZ2-sHGPgjn-Ug72v-PB7o4y2zsB6P9We6S0zBk6cth0HumQuYZWdpFwW=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SpAnGqjOhchrXKAeGjmzXhaTnM7-Xi5mo5SKDagl8aRlEWob1vgVB9-pFpGnDK9Tl3f4VLl_QuVsCSN9bMCm6hpDr4r9SdtoDSFsRrns6qbF3SWhs9hnXay2eip4krbk5e2-KGoYyQ_ip8=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RiCNXMeJo4G0XrjTkmBLT6CAhARY8zpa3l018bRfpc4LBPH0NR84VLbxK64E3tILdJET3dOTWFHjT_akJ62l-2q7LR5dDwg8VN7U_XlCMa_SSbOgLDM4Yo5HYva-Rn-lJkQRkKkZZa6P-y=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9R6L0u5nlVH-Jb_1smVflA7-3MqnolVoRknOKm0p84fm9vlRvhrCRXyORXvk76n-EM5GD4kODviJ6jQzpnQ4eIlV716BSwyPCLUEhpkYqsyBllAX5WDnE37QLI3PkYjBcJ6tbF4MNtkUq32=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QBgDYGIfhmPJiJltVzHkwRoz6pnPONGSn1kYSajTvediT83dOVzTW_1Zw8BuXthhX2iegTIELnK8FLZ3Rut20PLxtbFX_OojJV4F3xI5P3QJjpgovCojLMR41elLCDXEwdjWChZcXdrSKr=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Qo-USZABoUMa5T6Fd78hPdpu8dgJ8gCgAvy8UeEQmGs7MoKYathm-0D_ZJrVAvE374yzz-IcB8M9VqgFWpmNcFGP19cP93Nuw2rG3qbD09mzuBzd9OBvgY9f7iYu9l_3OshUXqZCDTkmc=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QwbjFpYZNO7QpBuOK7I6XbylzO3lNJQMCyQR6OfAe7s-96VJjTDwCFPEn8j7UGm63H_7jRbUCxLhV_FL1nea_tkqsYmRsRGbmC6bt_J6bqFCtGuQhvPohQRSK49MX-5EqvBnZ4tpYcTsX8=w1400-h1400-k-no",
+      "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QqaHM-HnVmpdI7xqH7-SoGu5jYSR1ilohDoKlqk0q2JIf0hNBUUfg8m-nMAMWnsn5A8DNYKrUWm_muJJY1NoZDLNVLQU6U4sEPVmx0C8Ol53TMjzFmTqAw1ORTofg8llwS9pPiSYeCh1zo=w1400-h1400-k-no"
+    ]
+  },
+  galleryPreview: 8,
+  reviews: [],
+  googleReviewsUrl: "https://www.google.com/maps/place/?q=place_id:ChIJTY9GFwA90i0RRUooXUXTfS0",
+  primaryColor: "#2F7A5B",
+  credit: ""
+};
+
+/* UI strings (usually no need to change) */
+const STRINGS = {
+  en: {
+    navAbout:"About", navGallery:"Gallery", navAmenities:"Amenities", navSave:"Book direct", navLocation:"Location", navContact:"Contact",
+    bookDirect:"Book Direct", from:"from", perNight:"/ night", scroll:"Scroll",
+    guests:"Guests", bedrooms:"Bedrooms", bathrooms:"Bathrooms", toBeach:"to Ubud centre",
+    aboutKicker:"The villa", aboutTitle:"A private pool villa near Ubud",
+    galleryKicker:"Gallery", galleryTitle:"Take a look around", viewAll:"Tap any photo to view full screen",
+    amenKicker:"Amenities", amenTitle:"What's in the villa",
+    saveKicker:"Book direct & save", saveTitle:"Book with us and pay less",
+    saveIntro:"Booking.com and Airbnb add 15–20% in commissions and service fees. When you book with us directly, you keep that money.",
+    nights:"Nights", onPlatforms:"On Booking / Airbnb", direct:"Direct with us", youSave:"You save",
+    saveNote:"Estimate based on the starting price of {price} per night and a typical {pct}% platform commission.",
+    b1t:"No extra fees", b1:"You pay the price of the room and nothing on top.",
+    b2t:"Talk to the owner", b2:"Your questions go straight to the family who runs the villa.",
+    b3t:"Ask for what you need", b3:"Arrival time, a longer stay or anything else. Tell us and we'll try to help.",
+    locKicker:"Location", locTitle:"Where you'll be", distTitle:"Distances",
+    bookKicker:"Reservation", bookTitle:"Check availability",
+    bookIntro:"Send us your dates and we'll reply on WhatsApp.",
+    arrival:"Arrival", departure:"Departure", guestsN:"Number of guests", yourName:"Your name", message:"Message (optional)",
+    msgPh:"Anything we should know?", sendWa:"Send on WhatsApp", call:"Call", emailBtn:"Email", or:"or contact us directly",
+    estimate:"{n} nights · from {total}", errDates:"Please choose a departure date after arrival.", errName:"Please enter your name.",
+    waIntro:"Hello! I'd like to book {villa}.", waArrival:"Arrival", waDeparture:"Departure", waGuests:"Guests", waName:"Name", waMsg:"Message",
+    revKicker:"Reviews", revTitle:"What our guests say", revAll:"See all reviews on Google",
+    revPhTitle:"Reviews placeholder", revPh:"Paste real Google Maps reviews into CONFIG.reviews — name, country, rating, date and text. Only use genuine reviews.",
+    bkTitle:"Book your stay", bkRoom:"Room", bkIn:"Check-in", bkOut:"Check-out", bkAdd:"Add date", bkPickIn:"Choose your check-in date", bkPickOut:"Now choose your check-out date", bkAvail:"Available", bkBooked:"Booked", bkYour:"Your dates", bkErrBooked:"Some nights in this range are booked. Pick other dates.", bkGuests:"Guests", bkName:"Full name", bkEmail:"Email", bkMsg:"Message (optional)", bkUpTo:"Up to {n} guests", bkNights:"{n} nights", bkSave:"You save {s} vs. Booking", bkNeedDates:"Please choose check-in and check-out dates.", viewAllBtn:"View all photos", backToVilla:"Back to the villa", photosWord:"photos", cardBadge:"Best rate when you book direct", footContact:"Contact", hBeach:"to Ubud", footHead1:"See you in", footCtaP:"Send us your dates and we'll get back to you on WhatsApp.", footExplore:"Explore", footFind:"Find us", footDir:"Get directions", footRights:"All rights reserved."
+  },
+  sq: {
+    navAbout:"Vila", navGallery:"Galeria", navAmenities:"Shërbimet", navSave:"Rezervo direkt", navLocation:"Vendndodhja", navContact:"Kontakt",
+    bookDirect:"Rezervo direkt", from:"nga", perNight:"/ natë", scroll:"Lëviz poshtë",
+    guests:"Mysafirë", bedrooms:"Dhoma gjumi", bathrooms:"Banjo", toBeach:"deri në qendër të Ubudit",
+    aboutKicker:"Vila", aboutTitle:"Vilë private me pishinë pranë Ubudit",
+    galleryKicker:"Galeria", galleryTitle:"Hidhni një sy", viewAll:"Prekni një foto për ta parë në ekran të plotë",
+    amenKicker:"Shërbimet", amenTitle:"Çfarë ofron vila",
+    saveKicker:"Rezervo direkt dhe kurse", saveTitle:"Rezervoni me ne dhe paguani më pak",
+    saveIntro:"Booking.com dhe Airbnb shtojnë 15–20% komisione dhe tarifa shërbimi. Kur rezervoni direkt me ne, ato para i mbani ju.",
+    nights:"Netë", onPlatforms:"Në Booking / Airbnb", direct:"Direkt me ne", youSave:"Kurseni",
+    saveNote:"Llogaritje sipas çmimit fillestar prej {price} për natë dhe një komisioni tipik prej {pct}%.",
+    b1t:"Pa tarifa shtesë", b1:"Paguani çmimin e dhomës dhe asgjë më shumë.",
+    b2t:"Flisni me pronarin", b2:"Pyetjet tuaja shkojnë direkt te familja që drejton vilën.",
+    b3t:"Kërkoni atë që ju duhet", b3:"Orari i mbërritjes, një qëndrim më i gjatë apo diçka tjetër. Na tregoni dhe do të përpiqemi t'ju ndihmojmë.",
+    locKicker:"Vendndodhja", locTitle:"Ku do të jeni", distTitle:"Distancat",
+    bookKicker:"Rezervim", bookTitle:"Kontrolloni disponueshmërinë",
+    bookIntro:"Na dërgoni datat dhe do t'ju përgjigjemi në WhatsApp.",
+    arrival:"Mbërritja", departure:"Largimi", guestsN:"Numri i mysafirëve", yourName:"Emri juaj", message:"Mesazh (opsional)",
+    msgPh:"Diçka që duhet të dimë?", sendWa:"Dërgo në WhatsApp", call:"Telefono", emailBtn:"Email", or:"ose na kontaktoni direkt",
+    estimate:"{n} netë · nga {total}", errDates:"Zgjidhni një datë largimi pas mbërritjes.", errName:"Ju lutem shkruani emrin tuaj.",
+    waIntro:"Përshëndetje! Dëshiroj të rezervoj në {villa}.", waArrival:"Mbërritja", waDeparture:"Largimi", waGuests:"Mysafirë", waName:"Emri", waMsg:"Mesazh",
+    revKicker:"Vlerësime", revTitle:"Çfarë thonë mysafirët", revAll:"Të gjitha vlerësimet në Google",
+    revPhTitle:"Vend për vlerësimet", revPh:"Vendosni vlerësime të vërteta nga Google Maps te CONFIG.reviews.",
+    bkTitle:"Rezervoni qëndrimin", bkRoom:"Dhoma", bkIn:"Mbërritja", bkOut:"Largimi", bkAdd:"Zgjidh datën", bkPickIn:"Zgjidhni datën e mbërritjes", bkPickOut:"Tani zgjidhni datën e largimit", bkAvail:"E lirë", bkBooked:"E zënë", bkYour:"Datat tuaja", bkErrBooked:"Disa netë në këtë periudhë janë të zëna. Zgjidhni data të tjera.", bkGuests:"Mysafirë", bkName:"Emri i plotë", bkEmail:"Email", bkMsg:"Mesazh (opsional)", bkUpTo:"Deri në {n} mysafirë", bkNights:"{n} netë", bkSave:"Kurseni {s} krahasuar me Booking", bkNeedDates:"Zgjidhni datat e mbërritjes dhe largimit.", viewAllBtn:"Shiko të gjitha fotot", backToVilla:"Kthehu te vila", photosWord:"foto", cardBadge:"Çmimi më i mirë kur rezervoni direkt", footContact:"Kontakt", hBeach:"deri te plazhi", footHead1:"Shihemi në", footCtaP:"Na dërgoni datat dhe do t'ju përgjigjemi në WhatsApp.", footExplore:"Eksploro", footFind:"Na gjeni", footDir:"Merr udhëzimet", footRights:"Të gjitha të drejtat e rezervuara."
+  }
+};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sea:#0B8A96; --sea-deep:#086a74; --sand:#FCF1DE; --sand-2:#F6E2BF; --ink:#173238; --muted:#4F6668; --line:#EFE1C8; --white:#FFFCF5; --sun:#F6B04A; --coral:#E8694A; --ocean:#0A3F47;
+  --serif:"Cormorant Garamond", Georgia, serif; --sans:"Manrope", system-ui, sans-serif;
+  --pad:clamp(20px,5vw,64px); --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:var(--sea);text-decoration:none}
+a:hover{color:var(--sea-deep)}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+p{text-wrap:pretty}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+section{padding:clamp(72px,11vw,140px) 0}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--coral);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--sun);flex:none}
+.h2{font-size:clamp(36px,6vw,58px);margin-bottom:20px}
+.lead{color:var(--muted);font-size:17px;max-width:560px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;border:1px solid transparent;font-weight:600;font-size:15px;letter-spacing:.02em;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--sea);color:#fff}
+.btn-primary:hover{background:var(--sea-deep);color:#fff}
+.btn-light{background:var(--sun);color:var(--ocean)}
+.btn-light:hover{background:#ffc164;color:var(--ocean)}
+.btn-ghost{border-color:var(--line);background:transparent;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--sea);color:var(--sea)}
+.btn-wa{background:#1F8F5F;color:#fff}
+.btn-wa:hover{background:#18764e;color:#fff}
+.btn svg{width:20px;height:20px}
+
+/* reveal */
+.rv{opacity:1}
+.rv.in{filter:none}
+@keyframes blurIn{from{opacity:0;filter:blur(16px);transform:translateY(18px)}to{opacity:1;filter:none;transform:none}}
+.hero-in > div > *{opacity:1}
+.hero-in > div > :nth-child(1){animation-delay:.2s}.hero-in > div > :nth-child(2){animation-delay:.4s}.hero-in > div > :nth-child(3){animation-delay:.65s}.hero-in > div > :nth-child(4){animation-delay:.85s}
+.marq{background:var(--ocean);color:#fff;overflow:hidden;padding:18px 0;white-space:nowrap}
+.marq-t{display:inline-flex;gap:28px;align-items:center;animation:marq 38s linear infinite;font-family:var(--serif);font-size:clamp(20px,2.4vw,28px)}
+.marq-t span:nth-child(4n+3){font-style:italic;color:var(--sun)}
+.marq-t i{width:6px;height:6px;border-radius:50%;background:var(--sun);flex:none}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.rv{filter:none}.hero-in > div > *{opacity:1;animation:none}.marq-t{animation:none}}
+.rv.split{opacity:1;transform:none}
+.sw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .12em;margin:0 -.04em -.12em}
+.sw > span{display:inline-block;transform:translateY(110%) rotate(4deg);transform-origin:0 100%;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.split.in .sw > span{transform:none}
+.scrub .sw > span{transition:transform .12s linear}
+.fw{transition:opacity .12s linear}
+.rv-img.scrubbed{transition:opacity .9s ease}
+.rv-img.scrubbed img{transition:none}
+@media (prefers-reduced-motion:reduce){.sw > span{transform:none;transition:none}}
+
+.rv.in{opacity:1;transform:none}
+.prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--sun);z-index:70;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.rv,.rv-img,.rv-img img{opacity:1;transform:none;transition:none;clip-path:none}html{scroll-behavior:auto}}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .35s,box-shadow .35s,color .35s;color:#fff}
+header.solid{background:rgba(255,252,245,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);box-shadow:0 1px 0 var(--line),0 10px 30px -20px rgba(10,63,71,.35)}
+header.mopen{color:#fff;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.hbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;height:76px;transition:height .35s}
+header.solid .hbar{height:64px}
+.logo{display:flex;flex-direction:column;line-height:1;font-family:var(--serif);font-size:25px;font-weight:600;color:inherit;letter-spacing:.01em}
+.logo:hover{color:inherit}
+.logo small{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;opacity:.75;margin-top:6px}
+nav.links{display:none;gap:34px;font-size:13px;font-weight:600;letter-spacing:.05em}
+nav.links a{position:relative;color:inherit;padding:8px 0;opacity:.88;transition:opacity .25s}
+nav.links a:hover,nav.links a.act{opacity:1;color:inherit}
+nav.links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1.5px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+nav.links a:hover::after,nav.links a.act::after{transform:scaleX(1)}
+.hright{display:flex;align-items:center;gap:12px;justify-self:end}
+.lang{display:flex;gap:2px;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:3px}
+header.solid:not(.mopen) .lang{border-color:var(--line)}
+.lang button{border:0;background:transparent;color:inherit;font-size:11px;font-weight:700;letter-spacing:.08em;padding:6px 9px;border-radius:999px;cursor:pointer;min-width:34px;transition:background .25s,color .25s}
+.lang button.on{background:#fff;color:var(--ocean)}
+header.solid:not(.mopen) .lang button.on{background:var(--sea);color:#fff}
+.hbook{display:none;min-height:44px;padding:0 22px;font-size:13px;letter-spacing:.04em}
+.menu{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:transparent;color:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+header.solid:not(.mopen) .menu{border-color:var(--line)}
+.menu i{display:block;width:18px;height:1.5px;background:currentColor;border-radius:2px;transition:transform .35s}
+header.mopen .menu i:first-child{transform:translateY(3.25px) rotate(45deg)}
+header.mopen .menu i:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:-1;background:var(--ocean);display:flex;flex-direction:column;justify-content:center;gap:4px;padding:96px var(--pad) calc(40px + env(safe-area-inset-bottom));opacity:0;pointer-events:none;transition:opacity .4s}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav a{font-family:var(--serif);font-size:clamp(34px,9vw,48px);line-height:1.2;color:#fff;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s cubic-bezier(.2,.7,.2,1)}
+.mnav a:hover{color:var(--sun)}
+.mnav.open a{opacity:1;transform:none}
+.mnav .btn{margin-top:28px;align-self:flex-start;font-family:var(--sans);font-size:15px;line-height:1}
+@media (min-width:1080px){
+  .hbar{grid-template-columns:1fr auto 1fr}
+  nav.links{display:flex}
+  .hbook{display:inline-flex}
+  .menu,.mnav{display:none}
+}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;padding:110px 0 0;overflow:hidden;background:var(--ocean)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:saturate(1.28) contrast(1.08) brightness(1.04);transform:scale(1.12);animation:heroZoom 2.6s cubic-bezier(.2,.7,.2,1) forwards,heroDrift 28s ease-in-out 2.6s infinite alternate}
+@keyframes heroZoom{to{transform:scale(1.02)}}
+@keyframes heroDrift{from{transform:scale(1.02)}to{transform:scale(1.1) translate(-1.5%,-1%)}}
+.hero .grade{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 80% at 80% 15%,rgba(255,196,120,.38),rgba(255,196,120,0) 60%),linear-gradient(180deg,rgba(40,170,190,.18),rgba(40,170,190,0) 50%);mix-blend-mode:soft-light}
+.hero .vig{position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 220px 40px rgba(4,30,36,.45)}
+@media (prefers-reduced-motion:reduce){.hero img{animation:none;transform:none}}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(75% 55% at 50% 52%,rgba(6,40,46,.62) 0%,rgba(6,40,46,.3) 60%,rgba(6,40,46,.12) 100%),linear-gradient(180deg,rgba(6,40,46,.35) 0%,rgba(6,40,46,0) 22%,rgba(6,40,46,0) 55%,rgba(6,40,46,.55) 100%)}
+.hero-in{position:relative;z-index:2;width:100%;padding-bottom:clamp(40px,8vh,96px);display:grid;gap:36px;text-align:center;justify-items:center}
+.hero .place{text-shadow:0 1px 12px rgba(4,30,36,.5);font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;margin-bottom:22px;display:flex;align-items:center;justify-content:center;gap:14px}
+.hero .place::before{content:"";width:44px;height:1px;background:currentColor;opacity:.7}
+.hero .place::after{content:"";width:44px;height:1px;background:currentColor;opacity:.7}
+.hero h1{font-size:clamp(52px,9vw,116px);text-shadow:0 2px 30px rgba(4,30,36,.35);font-weight:400;line-height:1;letter-spacing:-.015em;margin-bottom:20px}
+.hero h1 em{font-style:italic}
+@media (max-width:640px){.hero h1 em{display:block}}
+.hero .tag{font-size:clamp(17px,1.8vw,20px);line-height:1.5;max-width:460px;margin-left:auto;margin-right:auto;margin-bottom:30px;text-shadow:0 1px 16px rgba(4,30,36,.5);opacity:.95}
+.hero-cta .btn{text-transform:uppercase;letter-spacing:.12em;font-size:14px;min-height:58px;padding:0 34px}
+.btn .ar svg,.hbook svg{width:18px;height:18px}
+.hcard{align-self:start;width:100%;max-width:340px;padding:20px 22px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center;color:#fff;transition:background .3s}
+.hcard:hover{color:#fff;background:rgba(255,255,255,.22)}
+.hcard .t{font-family:var(--serif);font-size:24px;line-height:1.15;text-transform:uppercase;letter-spacing:.03em}
+.hcard .s{font-family:var(--serif);font-size:22px}
+.hcard .s span{font-family:var(--sans);font-size:13px;opacity:.85}
+.hcard .go{grid-row:1/3;grid-column:2;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center}
+.hcard .go svg{width:18px;height:18px}
+.hcard .k,.hcard .ok{grid-column:1/-1;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.hcard .ok{margin-top:6px;display:flex;align-items:center;gap:8px}
+.hcard .ok::before{content:"";width:7px;height:7px;border-radius:50%;background:#5BD08A}
+.hscroll,.hloc{display:none}
+@keyframes sc{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(8px)}}
+@media (min-width:980px){
+  .hero{align-items:center;padding-top:76px}
+  .hero-in{grid-template-columns:minmax(0,1fr);padding-bottom:40px;align-items:start}
+  .hscroll,.hloc{position:absolute;z-index:2;bottom:28px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.9}
+  .hscroll{left:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}
+  .hloc{right:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}
+  .hscroll i{width:20px;height:32px;border:1.5px solid currentColor;border-radius:12px;position:relative}
+  .hscroll i::after{content:"";position:absolute;left:50%;top:6px;width:2px;height:6px;margin-left:-1px;background:currentColor;border-radius:2px;animation:sc 1.8s infinite}
+  .hloc svg{width:16px;height:16px}
+}
+
+/* stats */
+.stats{padding:0;background:var(--white);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.stat{display:flex;align-items:center;gap:14px;padding:26px 8px}
+.stat:nth-child(odd){border-right:1px solid var(--line);padding-left:0}
+.stat:nth-child(even){padding-left:20px}
+.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+.stat svg{width:46px;height:46px;padding:10px;border-radius:50%;background:var(--sand);color:var(--coral);flex:none;stroke-width:1.5}
+.stat b{display:block;font-family:var(--serif);font-size:30px;font-weight:600;line-height:1}
+.stat span{font-size:13px;color:var(--muted)}
+@media (min-width:760px){
+  .stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stat{justify-content:center;padding:34px 12px!important;border-bottom:0!important;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+}
+
+/* about */
+.about-grid{display:grid;gap:44px;align-items:center}
+.about-text p{color:var(--muted);font-size:17px;margin-bottom:18px}
+.about-text p:first-of-type{color:var(--ink);font-size:19px}
+.about-img{aspect-ratio:4/5;border-radius:180px 180px 8px 8px;overflow:hidden;background:var(--sand-2)}
+.about-img img{width:100%;height:100%;object-fit:cover}
+@media (min-width:900px){.about-grid{grid-template-columns:1.05fr .95fr;gap:90px}}
+
+/* gallery */
+.gallery{background:var(--sand)}
+.ghead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:36px}
+.ghead .hint{font-size:14px;color:var(--muted)}
+.ggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gi{position:relative;overflow:hidden;border:0;padding:0;cursor:zoom-in;background:var(--sand-2);aspect-ratio:1;border-radius:14px}
+.gi:first-child{grid-column:span 2;aspect-ratio:16/10}
+@media (max-width:819px){.gi:last-child:nth-child(even){grid-column:span 2;aspect-ratio:16/10}}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.gi:hover img{transform:scale(1.04)}
+@media (min-width:820px){
+  .ggrid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:12px}
+  .gi{aspect-ratio:auto}
+  .gi:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+  .gi:nth-child(4){grid-row:span 2}
+}
+
+/* all-photos page */
+.pg{position:fixed;inset:0;z-index:90;background:var(--white);overflow-y:auto;display:none;-webkit-overflow-scrolling:touch}
+.pg.open{display:block;animation:pgIn .4s ease}
+@keyframes pgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.pg-h{position:sticky;top:0;z-index:2;background:rgba(255,252,245,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.pg-h .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.pg-back{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;cursor:pointer;min-height:44px}
+.pg-back svg{width:18px;height:18px;transform:rotate(180deg)}
+.pg-h .btn{min-height:42px;padding:0 20px;font-size:14px}
+.pg-top{padding:48px 0 28px}
+.pg-top p{color:var(--muted)}
+.pg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;grid-auto-flow:dense}
+.pg-grid button{display:block;width:100%;margin:0;border:0;padding:0;border-radius:14px;overflow:hidden;cursor:zoom-in;background:var(--sand-2);aspect-ratio:4/5}
+.pg-grid button:nth-child(5n+1){grid-column:span 2;aspect-ratio:3/2}
+.pg-grid img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pg-grid button:hover img{transform:scale(1.03)}
+.pg-end{display:flex;justify-content:center;padding:40px 0 calc(64px + env(safe-area-inset-bottom))}
+@media (min-width:900px){.pg-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:260px;gap:14px}.pg-grid button,.pg-grid button:nth-child(5n+1){aspect-ratio:auto;grid-column:auto}.pg-grid button:nth-child(6n+1){grid-column:span 2;grid-row:span 2}.pg-grid button:nth-child(6n+4){grid-column:span 2}}
+
+/* booking modal */
+.bm{position:fixed;inset:0;z-index:95;display:none;align-items:flex-start;justify-content:center;background:rgba(6,30,36,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);overflow-y:auto;padding:24px 12px}
+.bm.open{display:flex;animation:pgIn .3s ease}
+.bm-box{position:relative;width:100%;max-width:680px;background:var(--white);border-radius:22px;padding:28px 20px 24px;box-shadow:0 30px 80px -20px rgba(6,30,36,.5);margin:auto 0}
+.bm-x{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.bm-x svg{width:18px;height:18px}
+.bm h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,6vw,46px);line-height:1.05;margin:0 56px 22px 0;color:var(--ocean)}
+.bm-l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:0 0 10px}
+.bm-rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.bm-room{text-align:left;border:1px solid var(--line);background:var(--sand);border-radius:14px;padding:14px 16px;cursor:pointer;color:var(--ink);font:inherit;transition:border-color .2s,background .2s}
+.bm-room b{display:block;font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.15}
+.bm-room span{font-size:13px;color:var(--muted)}
+.bm-room.on{border-color:var(--ocean);background:#fff;box-shadow:inset 0 0 0 1px var(--ocean)}
+.bm-dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.bm-d{text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--ink);min-height:64px}
+.bm-d small{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:4px}
+.bm-d span{font-size:15px}
+.bm-d.act{border-color:var(--ocean);box-shadow:inset 0 0 0 1px var(--ocean)}
+.cal{border:1px solid var(--line);border-radius:18px;background:#fff;padding:16px 14px;margin-bottom:12px}
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.cal-h p{font-size:14px;color:var(--muted);text-align:center}
+.cal-nav{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;font-size:18px;line-height:1;flex:none}
+.cal-nav:disabled{opacity:.35;cursor:default}
+.cal-ms{display:grid;grid-template-columns:1fr;gap:24px}
+.cal-m h4{font-family:var(--serif);font-size:22px;font-weight:600;text-align:center;margin:0 0 10px;color:var(--ocean)}
+.cal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-g .wd{font-size:11.5px;text-align:center;color:var(--muted);padding:4px 0}
+.cal-g button{aspect-ratio:1;border:0;border-radius:8px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;background:#E3F1F2;color:var(--ocean);padding:0;transition:background .15s}
+.cal-g button:hover{background:#cbe6e8}
+.cal-g button.past{background:transparent;color:#B9C3C4;cursor:default;font-weight:400}
+.cal-g button.bk{background:#FBE1DA;color:#B4533B;cursor:not-allowed;text-decoration:line-through}
+.cal-g button.rg{background:#BFDDE0}
+.cal-g button.sel{background:var(--ocean);color:#fff}
+.cal-leg{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:13px;color:var(--muted)}
+.cal-leg span{display:flex;align-items:center;gap:7px}
+.cal-leg i{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.08)}
+.bm-err{color:#B4382A;font-size:14px;margin-top:10px;min-height:0}
+.bm-err:empty{display:none}
+.bm-g{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0 18px;background:#fff}
+.bm-g .ctl{display:flex;align-items:center;gap:14px}
+.bm-g button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:20px;cursor:pointer}
+.bm-g button:disabled{opacity:.35;cursor:default}
+.bm-g b{font-family:var(--serif);font-size:26px;font-weight:600;min-width:22px;text-align:center}
+.bm-f{display:grid;gap:12px;margin-bottom:16px}
+.bm-f label{display:block}
+.bm-f input,.bm-f textarea{width:100%;min-height:50px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;color:var(--ink);background:#fff;margin-top:6px}
+.bm-f textarea{min-height:84px;resize:vertical}
+.bm-f input:focus,.bm-f textarea:focus{outline:none;border-color:var(--sea);box-shadow:0 0 0 3px rgba(11,138,150,.15)}
+.bm-sum{background:var(--sand);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.bm-sum b{font-family:var(--serif);font-size:26px;color:var(--ocean)}
+.bm-sum small{display:block;color:var(--coral);font-weight:700;font-size:13px}
+.bm-act{display:grid;gap:10px}
+.bm-act .btn{width:100%;justify-content:center}
+@media (min-width:640px){
+  .bm{padding:40px 20px}
+  .bm-box{padding:40px 40px 32px}
+  .cal-ms{grid-template-columns:1fr 1fr}
+  .bm-f{grid-template-columns:1fr 1fr}
+  .bm-f .full{grid-column:1/-1}
+  .bm-act{grid-template-columns:2fr 1fr}
+}
+@media (max-width:639px){.cal-m + .cal-m{display:none}}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(12,20,22,.96);display:none;align-items:center;justify-content:center;touch-action:pan-y}
+.lb.open{display:flex}
+.lb img{max-width:94vw;max-height:84vh;object-fit:contain;user-select:none;-webkit-user-drag:none;transition:opacity .25s}
+.lb button{position:absolute;border:0;background:rgba(255,255,255,.1);color:#fff;width:52px;height:52px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb button:hover{background:rgba(255,255,255,.2)}
+.lb button svg{width:22px;height:22px}
+.lb .x{top:16px;right:16px}
+.lb .prev{left:16px;top:50%;transform:translateY(-50%)}
+.lb .next{right:16px;top:50%;transform:translateY(-50%)}
+.lb .cnt{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-size:13px;letter-spacing:.12em}
+@media (max-width:640px){.lb .prev,.lb .next{top:auto;bottom:10px;transform:none}.lb .cnt{bottom:26px}}
+
+/* amenities */
+.agrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
+.acard{border:1px solid var(--line);border-radius:18px;padding:24px 18px;display:flex;flex-direction:column;gap:16px;background:var(--sand);transition:border-color .3s,transform .3s}
+.acard:hover{border-color:var(--sea);transform:translateY(-2px)}
+.acard svg{width:52px;height:52px;padding:12px;border-radius:50%;background:#fff;color:var(--sea);stroke-width:1.4}
+.acard span{font-weight:500;font-size:15px;line-height:1.35}
+@media (min-width:760px){.agrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.acard{padding:30px 24px}}
+
+/* save */
+.save{background:var(--sea);color:#fff}
+.save .kicker{color:var(--sun)}
+.save .lead{color:rgba(255,255,255,.86)}
+.save-grid{display:grid;gap:40px;margin-top:44px}
+.calc{background:var(--white);color:var(--ink);border-radius:22px;padding:clamp(22px,4vw,40px);box-shadow:0 30px 60px -30px rgba(0,0,0,.4)}
+.nights{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.nights label{font-weight:600;font-size:15px}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center}
+.stepper button:hover{border-color:var(--sea);color:var(--sea)}
+.stepper output{min-width:48px;text-align:center;font-family:var(--serif);font-size:30px;font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0}
+.row .l{font-size:15px;color:var(--muted)}
+.row .v{font-family:var(--serif);font-size:28px;font-weight:600;white-space:nowrap}
+.row.platform .v{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.row.direct .l{color:var(--ink);font-weight:600}
+.row.direct .v{color:var(--sea);font-size:34px}
+.bar{height:8px;border-radius:8px;background:var(--sand-2);overflow:hidden;margin:2px 0 6px}
+.bar i{display:block;height:100%;background:var(--sea);border-radius:8px;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.bar.p i{background:var(--coral)}
+.saving{margin-top:22px;background:var(--sun);border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.saving span{font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.saving span{color:var(--ocean)}
+.saving b{font-family:var(--serif);font-size:clamp(40px,7vw,52px);font-weight:600;color:var(--ocean);line-height:1}
+.note{font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.5}
+.benefits{display:grid;gap:28px;align-content:center}
+.ben{display:flex;gap:16px}
+.ben .ck{flex:none;width:34px;height:34px;border-radius:50%;background:var(--sun);color:var(--ocean);display:flex;align-items:center;justify-content:center}
+.ben .ck svg{width:16px;height:16px}
+.ben h3{font-size:24px;margin-bottom:4px}
+.ben p{color:rgba(255,255,255,.86);font-size:15px}
+.save .btn{margin-top:8px;justify-self:start}
+@media (min-width:900px){.save-grid{grid-template-columns:1.1fr .9fr;gap:80px}}
+
+/* location */
+.loc-grid{display:grid;gap:36px;margin-top:40px}
+.map{aspect-ratio:4/3;border-radius:18px;overflow:hidden;background:var(--sand-2);border:1px solid var(--line)}
+.map iframe{width:100%;height:100%;border:0}
+.dist h3{font-size:28px;margin-bottom:10px}
+.dist li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:16px}
+.dist li b{font-weight:700;color:var(--coral);white-space:nowrap}
+@media (min-width:900px){.loc-grid{grid-template-columns:1.5fr 1fr;gap:64px}.map{aspect-ratio:auto;min-height:440px}}
+
+/* booking */
+.booking{background:var(--sand)}
+.bk-grid{display:grid;gap:40px}
+form{background:#fff;border-radius:22px;padding:clamp(22px,4vw,40px);display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.f{display:flex;flex-direction:column;gap:6px;grid-column:span 2}
+.f.half{grid-column:span 1}
+.f label{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.f input,.f select,.f textarea{width:100%;min-height:50px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--white);font-size:16px;outline:none;transition:border-color .2s}
+.f textarea{min-height:96px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--sea)}
+.est{grid-column:span 2;font-size:14px;color:var(--sea);font-weight:600;min-height:20px}
+.err{grid-column:span 2;font-size:14px;color:#A2402E;min-height:0}
+form .btn{grid-column:span 2;width:100%}
+.alt{display:flex;flex-direction:column;gap:16px}
+.alt p{font-size:14px;color:var(--muted)}
+.alt-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.alt-btns .btn{width:100%;padding:0 16px}
+.contact-list{margin-top:8px;display:grid;gap:6px;font-size:15px}
+.bk-grid form{display:none}
+.bk-grid{max-width:560px}
+.bk-m{display:inline-flex;width:100%;min-height:56px;margin-top:6px}
+
+/* reviews */
+.rv-ph{margin-top:40px;border:1.5px dashed #E3B979;border-radius:22px;padding:clamp(28px,5vw,48px);text-align:center;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(233,223,207,.35) 14px 15px)}
+.rv-ph .tag{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#8A7550;border:1px solid #C9B999;border-radius:999px;padding:5px 12px;margin-bottom:14px}
+.rv-ph p{max-width:520px;margin:0 auto;color:var(--muted);font-size:15px}
+.rgrid{display:grid;gap:16px;margin-top:40px}
+.rcard{border:1px solid var(--line);border-radius:18px;padding:28px;background:#fff}
+.stars{color:var(--sun);letter-spacing:3px;margin-bottom:12px}
+.rcard p{font-family:var(--serif);font-size:21px;line-height:1.45;margin-bottom:18px}
+.rcard .who{font-size:14px;color:var(--muted)}
+.rcard .who b{color:var(--ink)}
+@media (min-width:820px){.rgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* footer */
+footer{background:var(--ocean);color:rgba(255,255,255,.78);padding:0 0 calc(28px + env(safe-area-inset-bottom));position:relative;overflow:hidden}
+footer a{color:#fff;transition:color .2s}
+footer a:hover{color:var(--sun)}
+.fcta{position:relative;padding:72px 0 56px;border-bottom:1px solid rgba(255,255,255,.12);display:grid;gap:28px;align-items:end}
+.fcta h3{font-family:var(--serif);font-weight:400;font-size:clamp(44px,8vw,92px);line-height:1;color:#fff;letter-spacing:-.01em}
+.fcta h3 em{font-style:italic;color:var(--sun)}
+.fcta p{margin-top:14px;max-width:420px;font-size:16px}
+.fcta .btn{justify-self:start}
+footer .logo{color:#fff;font-size:30px}
+.fgrid{display:grid;gap:36px;padding:48px 0 8px}
+footer h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px;font-weight:700}
+.fc{display:flex;align-items:center;gap:12px;font-size:15px;margin-bottom:12px}
+.fc .ic{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex:none;color:var(--sun)}
+.fc .ic svg{width:17px;height:17px}
+.flinks{display:grid;gap:10px;font-size:15px}
+.flinks a{color:rgba(255,255,255,.85)}
+.fbottom{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:13px;color:rgba(255,255,255,.6)}
+.fbottom [data-c="credit"]{color:rgba(255,255,255,.85)}
+@media (min-width:820px){
+  .fcta{grid-template-columns:1fr auto;padding:96px 0 64px}
+  .fcta .btn{justify-self:end}
+  .fgrid{grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-top:56px}
+}
+
+
+/* mobile polish */
+.hfacts{display:none}
+@media (max-width:640px){
+  section{padding:64px 0}
+  .h2{font-size:34px;margin-bottom:14px}
+  .lead{font-size:16px}
+  .hbar,header.solid .hbar{height:62px;gap:10px}
+  .logo{font-size:22px}
+  .lang button{padding:5px 8px;min-width:30px}
+  .menu{width:42px;height:42px}
+  .hero{min-height:100svh;padding-top:80px;align-items:flex-end}
+  .hero img{object-position:center 60%}
+  .hero::after{background:linear-gradient(180deg,rgba(6,40,46,.45) 0%,rgba(6,40,46,0) 24%,rgba(6,40,46,.15) 45%,rgba(6,40,46,.82) 100%)}
+  .hero-in{padding-bottom:calc(28px + env(safe-area-inset-bottom));gap:0}
+  .hero-in > div{width:100%}
+  .hero .place{font-size:11px;letter-spacing:.24em;margin-bottom:14px;gap:10px}
+  .hero .place::before,.hero .place::after{width:22px}
+  .hero h1{font-size:58px;line-height:.95;margin-bottom:14px}
+  .hero .tag{font-size:16px;max-width:300px;margin-bottom:22px}
+  .hero-cta .btn{width:100%;max-width:340px;min-height:56px;font-size:13px}
+  .hfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:22px auto 0;max-width:340px;border-top:1px solid rgba(255,255,255,.25);padding-top:16px}
+  .hfacts div{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .hfacts div + div{border-left:1px solid rgba(255,255,255,.2)}
+  .hfacts b{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1}
+  .hfacts span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+  .stat{padding:20px 6px;gap:10px}
+  .stat svg{width:40px;height:40px;padding:9px}
+  .stat b{font-size:26px}
+  .about-grid{gap:32px}
+  .about-img{aspect-ratio:1/1.1;border-radius:150px 150px 14px 14px}
+  .about-text p{font-size:16px}
+  .about-text p:first-of-type{font-size:18px}
+  .ghead{margin-bottom:22px}
+  .ggrid{gap:6px}
+  .gi{border-radius:12px}
+  .agrid{margin-top:26px;gap:10px}
+  .acard{padding:18px 14px;gap:12px;border-radius:16px}
+  .acard svg{width:44px;height:44px;padding:10px}
+  .acard span{font-size:14px}
+  .save-grid{margin-top:28px;gap:36px}
+  .calc{padding:20px 18px}
+  .row .v{font-size:24px}
+  .row.direct .v{font-size:30px}
+  .saving{padding:16px 18px}
+  .saving b{font-size:38px}
+  .ben h3{font-size:21px}
+  .save .btn{width:100%}
+  .loc-grid{margin-top:26px;gap:26px}
+  .map{aspect-ratio:1/1}
+  .bk-grid form{display:none}
+  .bk-m{display:inline-flex;width:100%;margin-top:6px}
+  .alt-btns .btn{min-height:50px}
+  .fcta{padding:56px 0 40px;gap:22px}
+  .fcta h3{font-size:50px}
+  .fcta .btn{width:100%}
+  .fgrid{grid-template-columns:1fr 1fr;gap:32px 20px;padding-top:36px}
+  .fgrid > div:first-child{grid-column:1/-1}
+  .fgrid > div:nth-child(2){grid-column:1/-1}
+  .fbottom{flex-direction:column;margin-top:28px;padding-bottom:64px}
+  .fab{width:56px;height:56px}
+}
+
+/* floating WhatsApp (mobile) */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;width:60px;height:60px;border-radius:50%;background:#1F8F5F;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px -8px rgba(0,0,0,.45);transform:scale(0);transition:transform .4s cubic-bezier(.2,.9,.3,1.3)}
+.fab.show{transform:scale(1)}
+.fab:hover{color:#fff;background:#18764e}
+.fab svg{width:30px;height:30px}
+@media (min-width:980px){.fab{display:none}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+
+<header id="hdr">
+  <div class="wrap hbar">
+    <a class="logo" href="#top"><span data-c="name"></span></a>
+    <nav class="links">
+      <a href="#about" data-t="navAbout"></a>
+      <a href="#gallery" data-t="navGallery"></a>
+      <a href="#amenities" data-t="navAmenities"></a>
+      <a href="#save" data-t="navSave"></a>
+      <a href="#location" data-t="navLocation"></a>
+    </nav>
+    <div class="hright">
+      <div class="lang" id="lang" style="display:none"></div>
+      <a class="btn btn-light hbook" href="#book"><span data-t="bookDirect"></span><span data-i="arrow"></span></a>
+      <button type="button" class="menu" id="menuBtn" aria-label="Menu"><i></i><i></i></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav">
+    <a href="#about" data-t="navAbout"></a>
+    <a href="#gallery" data-t="navGallery"></a>
+    <a href="#amenities" data-t="navAmenities"></a>
+    <a href="#save" data-t="navSave"></a>
+    <a href="#location" data-t="navLocation"></a>
+    <a class="btn btn-light" href="#book"><span data-t="bookDirect"></span><span class="ar" data-i="arrow"></span></a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <img id="heroImg" alt="" fetchpriority="high">
+  <div class="grade"></div><div class="vig"></div>
+  <div class="wrap hero-in">
+    <div>
+      <div class="place" id="heroPlace"></div>
+      <h1 id="heroTitle"></h1>
+      <p class="tag" id="heroTag"></p>
+      <div class="hero-cta">
+        <a class="btn btn-light" href="#book"><span data-t="bookDirect"></span><span class="ar" data-i="arrow"></span></a>
+      </div>
+      <div class="hfacts" id="hFacts"></div>
+    </div>
+  </div>
+  <div class="hscroll"><i></i><span data-t="scroll"></span></div>
+  <div class="hloc"><span data-i="pin"></span><span id="hLoc"></span></div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid" id="stats"></div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text rv rv-l">
+      <div class="kicker" data-t="aboutKicker"></div>
+      <h2 class="h2" data-t="aboutTitle"></h2>
+      <div id="aboutText"></div>
+    </div>
+    <div class="about-img rv rv-img"><img id="aboutImg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="ghead rv">
+      <div><div class="kicker" data-t="galleryKicker"></div><h2 class="h2" data-t="galleryTitle" style="margin:0"></h2></div>
+      <div class="hint" data-t="viewAll"></div>
+    </div>
+    <div class="ggrid" id="ggrid"></div>
+    <div style="display:flex;justify-content:center;margin-top:32px"><a class="btn btn-primary" id="gAll" href="#photos"><span id="gAllT"></span><span class="ar" data-i="arrow"></span></a></div>
+  </div>
+</section>
+
+<section id="amenities">
+  <div class="wrap">
+    <div class="rv"><div class="kicker" data-t="amenKicker"></div><h2 class="h2" data-t="amenTitle"></h2></div>
+    <div class="agrid" id="agrid"></div>
+  </div>
+</section>
+
+<section class="save" id="save">
+  <div class="wrap">
+    <div class="rv">
+      <div class="kicker" data-t="saveKicker"></div>
+      <h2 class="h2" data-t="saveTitle"></h2>
+    </div>
+    <div class="save-grid">
+      <div class="calc rv rv-l">
+        <div class="nights">
+          <label data-t="nights"></label>
+          <div class="stepper">
+            <button type="button" id="nMinus" aria-label="−">−</button>
+            <output id="nVal"></output>
+            <button type="button" id="nPlus" aria-label="+">+</button>
+          </div>
+        </div>
+        <div class="row platform"><span class="l" data-t="onPlatforms"></span><span class="v" id="pPlat"></span></div>
+        <div class="bar p"><i id="barP" style="width:100%"></i></div>
+        <div class="row direct"><span class="l" data-t="direct"></span><span class="v" id="pDir"></span></div>
+        <div class="bar"><i id="barD"></i></div>
+        <div class="saving"><span data-t="youSave"></span><b id="pSave"></b></div>
+        <p class="note" id="saveNote"></p>
+      </div>
+      <div class="benefits">
+        <div class="ben rv"><div class="ck" data-i="check"></div><div><h3 data-t="b1t"></h3><p data-t="b1"></p></div></div>
+        <div class="ben rv"><div class="ck" data-i="check"></div><div><h3 data-t="b2t"></h3><p data-t="b2"></p></div></div>
+        <div class="ben rv"><div class="ck" data-i="check"></div><div><h3 data-t="b3t"></h3><p data-t="b3"></p></div></div>
+        <a class="btn btn-light rv" href="#book" data-t="bookDirect"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="wrap">
+    <div class="rv"><div class="kicker" data-t="locKicker"></div><h2 class="h2" data-t="locTitle"></h2><p class="lead" id="locPlace"></p></div>
+    <div class="loc-grid">
+      <div class="map rv rv-img"><iframe id="map" title="Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="dist rv rv-r"><h3 data-t="distTitle"></h3><ul id="dist"></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="book">
+  <div class="wrap bk-grid">
+    <div class="alt rv rv-l">
+      <div class="kicker" data-t="bookKicker"></div>
+      <h2 class="h2" data-t="bookTitle" style="margin-bottom:4px"></h2>
+      <p class="lead" data-t="bookIntro" style="font-size:17px"></p>
+      <p data-t="or" style="margin-top:12px"></p>
+      <div class="alt-btns">
+        <a class="btn btn-ghost" id="callBtn"><span data-i="phone"></span><span data-t="call"></span></a>
+        <a class="btn btn-ghost" id="mailBtn"><span data-i="mail"></span><span data-t="emailBtn"></span></a>
+      </div>
+      <a class="btn btn-primary bk-m" href="#book"><span data-t="bkTitle"></span><span class="ar" data-i="arrow"></span></a>
+      <div class="contact-list"><a id="phoneTxt"></a><a id="mailTxt"></a></div>
+    </div>
+    <form id="form" class="rv rv-r" novalidate>
+      <div class="f half"><label for="fIn" data-t="arrival"></label><input type="date" id="fIn" required></div>
+      <div class="f half"><label for="fOut" data-t="departure"></label><input type="date" id="fOut" required></div>
+      <div class="f half"><label for="fG" data-t="guestsN"></label><select id="fG"></select></div>
+      <div class="f half"><label for="fN" data-t="yourName"></label><input type="text" id="fN" autocomplete="name" required></div>
+      <div class="f"><label for="fM" data-t="message"></label><textarea id="fM"></textarea></div>
+      <div class="est" id="est"></div>
+      <div class="err" id="err"></div>
+      <button class="btn btn-wa" type="submit"><span data-i="wa"></span><span data-t="sendWa"></span></button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fcta">
+      <div><h3 id="footHead"></h3><p data-t="footCtaP"></p></div>
+      <a class="btn btn-light" href="#book"><span data-t="bookDirect"></span><span class="ar" data-i="arrow"></span></a>
+    </div>
+    <div class="fgrid">
+      <div><div class="logo" data-c="name"></div><p id="footPlace" style="margin-top:8px"></p></div>
+      <div><h4 data-t="footContact"></h4>
+        <div class="fc"><span class="ic" data-i="phone"></span><a id="fPhone"></a></div>
+        <div class="fc"><span class="ic" data-i="mail"></span><a id="fMail"></a></div>
+        <div class="fc"><span class="ic" data-i="wa"></span><a id="fWa">WhatsApp</a></div>
+      </div>
+      <div><h4 data-t="footExplore"></h4>
+        <nav class="flinks"><a href="#about" data-t="navAbout"></a><a href="#gallery" data-t="navGallery"></a><a href="#amenities" data-t="navAmenities"></a><a href="#save" data-t="navSave"></a><a href="#location" data-t="navLocation"></a></nav>
+      </div>
+      <div><h4 data-t="footFind"></h4>
+        <div class="fc"><span class="ic" data-i="pin"></span><a id="fDir" target="_blank" rel="noopener" data-t="footDir"></a></div>
+      </div>
+    </div>
+    <div class="fbottom"><span>© <span id="yr"></span> <span data-c="name"></span>. <span data-t="footRights"></span></span></div>
+  </div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="WhatsApp"><span data-i="wa"></span></a>
+
+<div class="pg" id="photos" aria-label="Photos">
+  <div class="pg-h"><div class="wrap">
+    <a class="pg-back" href="#gallery"><span data-i="arrow"></span><span data-t="backToVilla"></span></a>
+    <a class="btn btn-primary" href="#book"><span data-t="bookDirect"></span><span class="ar" data-i="arrow"></span></a>
+  </div></div>
+  <div class="wrap">
+    <div class="pg-top"><div class="kicker" data-c="name"></div><h2 class="h2" data-t="galleryTitle" style="margin-bottom:8px"></h2><p id="pgCount"></p></div>
+    <div class="pg-grid" id="pgGrid"></div>
+    <div class="pg-end"><a class="btn btn-primary" href="#book"><span data-t="bookDirect"></span><span class="ar" data-i="arrow"></span></a></div>
+  </div>
+</div>
+
+<div class="bm" id="bm" role="dialog" aria-modal="true" aria-labelledby="bmT">
+  <div class="bm-box">
+    <button type="button" class="bm-x" id="bmX" aria-label="Close" data-i="x"></button>
+    <h2 id="bmT" data-t="bkTitle"></h2>
+    <p class="bm-l" data-t="bkRoom"></p>
+    <div class="bm-rooms" id="bmRooms"></div>
+    <div class="bm-dates">
+      <button type="button" class="bm-d" id="bmIn"><small data-t="bkIn"></small><span></span></button>
+      <button type="button" class="bm-d" id="bmOut"><small data-t="bkOut"></small><span></span></button>
+    </div>
+    <div class="cal">
+      <div class="cal-h"><button type="button" class="cal-nav" id="calPrev" aria-label="Previous">‹</button><p id="calHint"></p><button type="button" class="cal-nav" id="calNext" aria-label="Next">›</button></div>
+      <div class="cal-ms" id="calMs"></div>
+      <div class="cal-leg">
+        <span><i style="background:#E3F1F2"></i><em data-t="bkAvail" style="font-style:normal"></em></span>
+        <span><i style="background:#FBE1DA"></i><em data-t="bkBooked" style="font-style:normal"></em></span>
+        <span><i style="background:var(--ocean)"></i><em data-t="bkYour" style="font-style:normal"></em></span>
+      </div>
+      <div class="bm-err" id="bmErr"></div>
+    </div>
+    <div class="bm-g">
+      <span class="bm-l" style="margin:0" data-t="bkGuests"></span>
+      <div class="ctl"><button type="button" id="gMinus" aria-label="−">−</button><b id="gNum">2</b><button type="button" id="gPlus" aria-label="+">+</button></div>
+    </div>
+    <div class="bm-f">
+      <label><span class="bm-l" data-t="bkName"></span><input type="text" id="bmName" autocomplete="name"></label>
+      <label><span class="bm-l" data-t="bkEmail"></span><input type="email" id="bmMail" autocomplete="email"></label>
+      <label class="full"><span class="bm-l" data-t="bkMsg"></span><textarea id="bmMsg"></textarea></label>
+    </div>
+    <div class="bm-sum" id="bmSum"></div>
+    <div class="bm-err" id="bmErr2" style="margin:-6px 0 12px"></div>
+    <div class="bm-act">
+      <button type="button" class="btn btn-wa" id="bmWa"><span data-i="wa"></span><span data-t="sendWa"></span></button>
+      <button type="button" class="btn btn-ghost" id="bmEm" data-t="emailBtn" style="border:1px solid var(--line)"></button>
+    </div>
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="x" id="lbX" aria-label="Close" data-i="x"></button>
+  <button class="prev" id="lbP" aria-label="Previous" data-i="left"></button>
+  <img id="lbImg" alt="">
+  <button class="next" id="lbN" aria-label="Next" data-i="right"></button>
+  <div class="cnt" id="lbC"></div>
+</div>
+
+<script>
+(function(){
+const C = CONFIG;
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const svg = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const ICONS = {
+  guests: svg('<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 13.9c2.3.2 4 1.7 4.5 4.6"/>'),
+  bed: svg('<path d="M3 18V7"/><path d="M3 14h18v4"/><path d="M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11" r="1.8"/>'),
+  bath: svg('<path d="M4 12h16v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2Z"/><path d="M6 12V6a2 2 0 0 1 3.7-1"/><path d="M7 19l-1 2M17 19l1 2"/>'),
+  beach: svg('<path d="M2 17c1.7 0 1.7 1.3 3.3 1.3S7 17 8.7 17s1.6 1.3 3.3 1.3 1.6-1.3 3.3-1.3 1.7 1.3 3.4 1.3S20.3 17 22 17"/><path d="M12 14 8 4"/><path d="M3.5 8.5A9 9 0 0 1 15 4.2L8 7Z"/>'),
+  pool: svg('<path d="M2 18c1.7 0 1.7 1.2 3.3 1.2S7 18 8.7 18s1.6 1.2 3.3 1.2 1.6-1.2 3.3-1.2 1.7 1.2 3.4 1.2S20.3 18 22 18"/><path d="M8 15V5.5a2 2 0 0 1 4 0"/><path d="M16 15V5.5a2 2 0 0 0-4 0"/><path d="M8 9h8M8 12.5h8"/>'),
+  wifi: svg('<path d="M2.5 9a14 14 0 0 1 19 0"/><path d="M5.5 12.5a9.5 9.5 0 0 1 13 0"/><path d="M8.7 16a5 5 0 0 1 6.6 0"/><circle cx="12" cy="19.2" r=".9" fill="currentColor"/>'),
+  parking: svg('<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M9.5 16.5v-9h3.2a2.8 2.8 0 0 1 0 5.6H9.5"/>'),
+  ac: svg('<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="m9.5 4.5 2.5 2 2.5-2M9.5 19.5l2.5-2 2.5 2"/>'),
+  seaview: svg('<circle cx="12" cy="9" r="3.5"/><path d="M12 2.5v1M5.5 9h-1M19.5 9h-1M7.4 4.4l.7.7M16.6 4.4l-.7.7"/><path d="M2 16c1.7 0 1.7 1.2 3.3 1.2S7 16 8.7 16s1.6 1.2 3.3 1.2 1.6-1.2 3.3-1.2 1.7 1.2 3.4 1.2S20.3 16 22 16"/><path d="M4 20.5h16"/>'),
+  kitchen: svg('<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3"/><path d="M7 11v10"/><path d="M17 21V3c-2 1-3.5 3.5-3.5 7.5H17"/>'),
+  bbq: svg('<path d="M4 10h16a8 8 0 0 1-16 0Z"/><path d="M8 17.5 6 21M16 17.5l2 3.5M12 18v3"/><path d="M9 3c-1 1 1 2 0 4M13 3c-1 1 1 2 0 4"/>'),
+  terrace: svg('<path d="M12 3 3 8h18Z"/><path d="M12 8v13"/><path d="M6 21v-5h12v5M4 16h16"/>'),
+  washer: svg('<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4.5"/><path d="M7.5 6.5h2"/>'),
+  tv: svg('<rect x="2.5" y="5" width="19" height="12.5" rx="1.5"/><path d="M8 21h8"/>'),
+  garden: svg('<path d="M12 21v-9"/><path d="M12 12c0-4 2.5-7 7-7 0 4.5-3 7-7 7Z"/><path d="M12 15c0-3-2-5.5-6-5.5 0 3.5 2.5 5.5 6 5.5Z"/>'),
+  pets: svg('<circle cx="6" cy="10" r="1.8"/><circle cx="9.5" cy="5.8" r="1.8"/><circle cx="14.5" cy="5.8" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 11.5c-3 0-5.5 4.2-5.5 6.3 0 1.6 1.4 2.2 2.8 2.2 1.1 0 1.7-.5 2.7-.5s1.6.5 2.7.5c1.4 0 2.8-.6 2.8-2.2 0-2.1-2.5-6.3-5.5-6.3Z"/>'),
+  check: svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+  // Rooms shown in the booking popup (name, max guests, price per night)
+  rooms: [
+    { name: "Deluxe Studio",    guests: 2, price: 55 },
+    { name: { en: "Family Room", sq: "Dhomë familjare" }, guests: 3, price: 65 },
+    { name: "Deluxe Apartment", guests: 6, price: 75 }
+  ],
+  // Booked nights: [check-in, check-out) — demo dates, replace with real ones
+  bookedDates: [["2026-10-14","2026-10-18"], ["2026-10-24","2026-10-27"], ["2026-11-06","2026-11-09"]],
+
+  phone: svg('<path d="M5 3.5h3.5l1.7 4.3-2.2 1.4a11 11 0 0 0 6.8 6.8l1.4-2.2 4.3 1.7V19a1.5 1.5 0 0 1-1.6 1.5A16.5 16.5 0 0 1 3.5 5.1 1.5 1.5 0 0 1 5 3.5Z"/>'),
+  mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/>'),
+  x: svg('<path d="M6 6l12 12M18 6 6 18"/>'),
+  arrow: svg('<path d="M4 12h15M13 6l6 6-6 6"/>'),
+  pin: svg('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  left: svg('<path d="m15 5-7 7 7 7"/>'),
+  right: svg('<path d="m9 5 7 7-7 7"/>'),
+  wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.5 5 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.9Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>'
+};
+
+// color from CONFIG
+const shade = (hex, f) => { const n=parseInt(hex.slice(1),16); const c=[n>>16,(n>>8)&255,n&255].map(v=>Math.round(v*f)); return '#'+c.map(v=>v.toString(16).padStart(2,'0')).join(''); };
+document.documentElement.style.setProperty('--sea', C.primaryColor);
+document.documentElement.style.setProperty('--sea-deep', shade(C.primaryColor, .75));
+
+let lang = 'en';
+if (!STRINGS[lang]) lang = 'en';
+let nights = C.defaultNights || 7;
+const LOCALE = { en:'en-GB', sq:'sq-AL' };
+const tr = v => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[lang] ?? v.en) : v;
+const T = (k, vars) => { let s = STRINGS[lang][k] ?? STRINGS.en[k] ?? ''; if (vars) for (const x in vars) s = s.replace('{'+x+'}', vars[x]); return s; };
+const money = n => new Intl.NumberFormat(LOCALE[lang], { style:'currency', currency:C.currency, maximumFractionDigits:0 }).format(Math.round(n));
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+// static, language-independent
+$$('[data-i]').forEach(el => el.innerHTML = ICONS[el.dataset.i] || '');
+$$('[data-c]').forEach(el => el.textContent = C[el.dataset.c]);
+$('#heroImg').src = C.images.hero;
+$('#aboutImg').src = C.images.about || C.images.gallery[0];
+const tel = 'tel:' + C.phone.replace(/[^\d+]/g,'');
+const mail = 'mailto:' + C.email;
+const wa = t => 'https://wa.me/' + C.whatsapp + (t ? '?text=' + encodeURIComponent(t) : '');
+$('#callBtn').href = tel; $('#phoneTxt').href = tel; $('#phoneTxt').textContent = C.phone; $('#fPhone').href = tel; $('#fPhone').textContent = C.phone;
+$('#mailBtn').href = mail; $('#mailTxt').href = mail; $('#mailTxt').textContent = C.email; $('#fMail').href = mail; $('#fMail').textContent = C.email;
+$('#fWa').href = wa(); $('#fWa').target = '_blank'; $('#fab').href = wa();
+$('#yr').textContent = new Date().getFullYear();
+const m = C.map, d = .006;
+$('#map').src = `https://www.openstreetmap.org/export/embed.html?bbox=${m.lng-d*1.6},${m.lat-d},${m.lng+d*1.6},${m.lat+d}&layer=mapnik&marker=${m.lat},${m.lng}`;
+$('#fG').innerHTML = Array.from({length:C.guests}, (_,i) => `<option value="${i+1}"${i+1===Math.min(2,C.guests)?' selected':''}>${i+1}</option>`).join('');
+const today = new Date().toISOString().slice(0,10);
+$('#fIn').min = today; $('#fOut').min = today;
+
+// gallery
+$('#ggrid').innerHTML = C.images.gallery.slice(0, C.galleryPreview || 7).map((src,i) => `<button class="gi rv" data-idx="${i}" aria-label="Photo ${i+1}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join('');
+
+function render(){
+  document.documentElement.lang = lang;
+  document.title = `${C.name} — ${C.place}, ${tr(C.country)}`;
+  $$('[data-t]').forEach(el => el.textContent = T(el.dataset.t));
+  $('#lang').innerHTML = Object.keys(STRINGS).map(l => `<button type="button" class="${l===lang?'on':''}" data-l="${l}">${l.toUpperCase()}</button>`).join('');
+  const placeStr = `${C.place}, ${tr(C.country)}`;
+  $('#heroPlace').textContent = placeStr; $('#locPlace').textContent = placeStr; $('#footPlace').textContent = placeStr; $('#hFacts').innerHTML = `<div><b>${C.guests}</b><span>${esc(T('guests'))}</span></div><div><b>${esc(C.beachDistance)}</b><span>${esc(T('hBeach'))}</span></div><div><b>${esc(money(C.priceFrom))}</b><span>${esc(T('from'))} ${esc(T('perNight'))}</span></div>`; $('#footHead').innerHTML = esc(T('footHead1')) + ' <em>' + esc(C.place) + '.</em>'; $('#fDir').href = 'https://www.google.com/maps/dir/?api=1&destination=' + C.map.lat + ',' + C.map.lng;
+  $('#heroTag').textContent = tr(C.tagline);
+  $('#gAllT').textContent = `${T('viewAllBtn')} (${C.images.gallery.length})`;
+  $('#pgCount').textContent = `${C.images.gallery.length} ${T('photosWord')}`;
+  const nw = C.name.split(' '); $('#heroTitle').innerHTML = nw.length > 1 ? esc(nw.slice(0,-1).join(' ')) + ' <em>' + esc(nw[nw.length-1]) + '.</em>' : esc(C.name);
+  $('#hLoc').textContent = placeStr;
+  $('#stats').innerHTML = [
+    ['guests', C.guests, T('guests')], ['bed', C.bedrooms, T('bedrooms')],
+    ['bath', C.bathrooms, T('bathrooms')], ['pin', C.beachDistance, T('toBeach')]
+  ].map(([i,v,l]) => `<div class="stat rv">${ICONS[i]}<div><b>${esc(v)}</b><span>${esc(l)}</span></div></div>`).join('');
+  $('#aboutText').innerHTML = tr(C.about).map(p => `<p>${esc(p)}</p>`).join('');
+  $('#agrid').innerHTML = C.amenities.map(a => `<div class="acard rv">${ICONS[a.icon]||ICONS.check}<span>${esc(tr(a.label))}</span></div>`).join('');
+  $('#dist').innerHTML = C.distances.map(x => `<li><span>${esc(tr(x.label))}</span><b>${esc(x.value)}</b></li>`).join('');
+  $('#fM').placeholder = T('msgPh');
+  calc(); estimate(); if (window.renderBk) renderBk(); if (window.observeRv) observeRv();
+}
+function renderMarq(){
+  const words = C.amenities.map(a => tr(a.label));
+  const run = words.map(w => '<span>' + esc(w) + '</span><i></i>').join('');
+  $('#marq').innerHTML = run + run + run + run;
+}
+function splitAll(){
+  $$('#heroTitle, #heroTag, .h2, .ben h3, .dist h3').forEach(el => {
+    if (el.closest('.pg')) return;
+    let n = 0;
+    const walk = node => [...node.childNodes].forEach(c => {
+      if (c.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(w => {
+          if (!w) return;
+          if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const o = document.createElement('span'); o.className = 'sw';
+          const i = document.createElement('span'); i.textContent = w; i.style.transitionDelay = (n++ * 70 + (el.id === 'heroTitle' ? 300 : el.id === 'heroTag' ? 700 : 0)) + 'ms';
+          o.appendChild(i); frag.appendChild(o);
+        });
+        c.replaceWith(frag);
+      } else if (c.nodeType === 1 && !c.classList.contains('sw')) walk(c);
+    });
+    walk(el);
+    el.classList.add('rv', 'split');
+    if (!el.closest('.hero')) el.classList.add('scrub');
+  });
+  $$('.about-text p').forEach(p => {
+    p.innerHTML = p.textContent.split(/\s+/).map(w => '<span class="fw">' + esc(w) + '</span>').join(' ');
+    p.classList.add('rv', 'split', 'fwp');
+  });
+  $$('.rv-img').forEach(el => el.classList.add('scrubbed'));
+}
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+function scrub(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vh = window.innerHeight;
+  $$('.scrub').forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+    const p = clamp01((vh * .98 - r.top) / (vh * .42));
+    const ws = el.querySelectorAll('.sw > span'), n = ws.length;
+    ws.forEach((s, i) => { const k = 1 - clamp01(p * (n * .6 + 1.5) - i * .6); s.style.transitionDelay = '0ms'; s.style.transform = 'translateY(' + (k * 110) + '%) rotate(' + (k * 5) + 'deg)'; });
+  });
+  $$('.fwp').forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+    const p = clamp01((vh * .9 - r.top) / (r.height + vh * .3));
+    const ws = el.querySelectorAll('.fw'), n = ws.length;
+    ws.forEach((s, i) => { s.style.opacity = .16 + .84 * clamp01(p * n * 1.15 - i); });
+  });
+  $$('.rv-img').forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+    const p = clamp01((vh - r.top) / (vh * .75)), k = 1 - p;
+    const round = el.classList.contains('about-img') ? '180px 180px 8px 8px' : '18px';
+    el.style.clipPath = 'inset(' + (k * 22) + '% ' + (k * 8) + '% 0 ' + (k * 8) + '% round ' + round + ')';
+    const img = el.querySelector('img'); if (img) img.style.transform = 'scale(' + (1 + k * .25) + ')';
+  });
+  $$('.gi').forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+    const p = clamp01((vh - r.top) / (vh * .6));
+    el.style.transform = 'translateY(' + ((1 - p) * 60) + 'px) scale(' + (.9 + p * .1) + ')';
+    el.style.opacity = .2 + p * .8;
+  });
+}
+
+function renderReviews(){
+  const R = C.reviews || [];
+  const link = C.googleReviewsUrl ? `<p style="margin-top:28px"><a href="${esc(C.googleReviewsUrl)}" target="_blank" rel="noopener">${T('revAll')} →</a></p>` : '';
+  if (!R.length) { $('#revWrap').innerHTML = `<div class="rv-ph"><span class="tag">${T('revPhTitle')}</span><p>${T('revPh')}</p></div>${link}`; return; }
+  $('#revWrap').innerHTML = `<div class="rgrid">${R.map(r => `<div class="rcard"><div class="stars">${'★'.repeat(r.rating||5)}</div><p>“${esc(r.text)}”</p><div class="who"><b>${esc(r.name)}</b>${r.country?' · '+esc(r.country):''}${r.date?' · '+esc(r.date):''}</div></div>`).join('')}</div>${link}`;
+}
+
+function calc(){
+  const base = C.priceFrom * nights, plat = base * (1 + C.platformCommission);
+  $('#nVal').textContent = nights;
+  $('#pPlat').textContent = money(plat);
+  $('#pDir').textContent = money(base);
+  $('#pSave').textContent = money(plat - base);
+  $('#barD').style.width = (100 / (1 + C.platformCommission)) + '%';
+  $('#saveNote').textContent = T('saveNote', { price: money(C.priceFrom), pct: Math.round(C.platformCommission*100) });
+}
+$('#nMinus').onclick = () => { nights = Math.max(1, nights-1); calc(); };
+$('#nPlus').onclick = () => { nights = Math.min(30, nights+1); calc(); };
+
+$('#lang').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; lang = b.dataset.l; localStorage.setItem('villaLang', lang); render(); });
+
+// booking form
+const nightsBetween = () => { const a = $('#fIn').value, b = $('#fOut').value; if (!a||!b) return 0; return Math.round((new Date(b) - new Date(a)) / 864e5); };
+function estimate(){ const n = nightsBetween(); $('#est').textContent = n > 0 ? T('estimate', { n, total: money(n * C.priceFrom) }) : ''; }
+$('#fIn').addEventListener('change', () => {
+  if ($('#fIn').value) { const nx = new Date($('#fIn').value); nx.setDate(nx.getDate()+1); const v = nx.toISOString().slice(0,10); $('#fOut').min = v; if (!$('#fOut').value || $('#fOut').value < v) { const w = new Date($('#fIn').value); w.setDate(w.getDate()+7); $('#fOut').value = w.toISOString().slice(0,10); } }
+  $('#err').textContent=''; estimate();
+});
+$('#fOut').addEventListener('change', () => { $('#err').textContent=''; estimate(); });
+const fmtDate = v => new Date(v + 'T12:00').toLocaleDateString(LOCALE[lang], { day:'numeric', month:'long', year:'numeric' });
+$('#form').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = $('#fN').value.trim();
+  if (nightsBetween() <= 0) { $('#err').textContent = T('errDates'); return; }
+  if (!name) { $('#err').textContent = T('errName'); $('#fN').focus(); return; }
+  $('#err').textContent = '';
+  const msg = $('#fM').value.trim();
+  const text = [
+    T('waIntro', { villa: C.name }), '',
+    `${T('waArrival')}: ${fmtDate($('#fIn').value)}`,
+    `${T('waDeparture')}: ${fmtDate($('#fOut').value)} (${nightsBetween()} ${T('nights').toLowerCase()})`,
+    `${T('waGuests')}: ${$('#fG').value}`,
+    `${T('waName')}: ${name}`,
+    msg ? `${T('waMsg')}: ${msg}` : ''
+  ].filter((l,i) => l || i===1).join('\n');
+  window.open(wa(text), '_blank', 'noopener');
+});
+
+// lightbox
+const G = C.images.gallery; let cur = 0;
+const lb = $('#lb'), lbImg = $('#lbImg');
+const show = i => { cur = (i + G.length) % G.length; lbImg.style.opacity = 0; lbImg.onload = () => lbImg.style.opacity = 1; lbImg.src = G[cur]; $('#lbC').textContent = `${cur+1} / ${G.length}`; };
+const open = i => { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; };
+const close = () => { lb.classList.remove('open'); document.body.style.overflow = $('#photos').classList.contains('open') ? 'hidden' : ''; };
+$('#ggrid').addEventListener('click', e => { const b = e.target.closest('.gi'); if (b) open(+b.dataset.idx); });
+$('#pgGrid').innerHTML = G.map((src,i) => '<button data-idx="'+i+'" aria-label="Photo '+(i+1)+'"><img src="'+esc(src)+'" alt="" loading="lazy"></button>').join('');
+$('#pgGrid').addEventListener('click', e => { const b = e.target.closest('button'); if (b) open(+b.dataset.idx); });
+const route = () => { const on = location.hash === '#photos'; $('#photos').classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) $('#photos').scrollTop = 0; };
+window.addEventListener('hashchange', route); route();
+$('#lbX').onclick = close; $('#lbP').onclick = () => show(cur-1); $('#lbN').onclick = () => show(cur+1);
+lb.addEventListener('click', e => { if (e.target === lb) close(); });
+document.addEventListener('keydown', e => { if (!lb.classList.contains('open')) return; if (e.key==='Escape') close(); if (e.key==='ArrowLeft') show(cur-1); if (e.key==='ArrowRight') show(cur+1); });
+let tx = 0, ty = 0;
+lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive:true });
+lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty; if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1)); else if (dy > 90) close(); });
+
+// header + fab on scroll
+const hdr = $('#hdr'), fab = $('#fab');
+const prog = $('#prog'), hin = $('.hero-in'), still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ticking = false;
+const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { ticking = false;
+  const y = window.scrollY, vh = window.innerHeight, max = document.documentElement.scrollHeight - vh;
+  hdr.classList.toggle('solid', y > 40); fab.classList.toggle('show', y > vh * .5);
+  prog.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+}); };
+window.addEventListener('scroll', onScroll, { passive:true });
+window.addEventListener('resize', onScroll);
+
+render(); onScroll();
+
+// mobile menu + active nav link
+const mnav = $('#mnav');
+const setMenu = on => { mnav.classList.toggle('open', on); hdr.classList.toggle('mopen', on); document.body.style.overflow = on ? 'hidden' : ''; [...mnav.querySelectorAll('a')].forEach((a,i) => a.style.transitionDelay = on ? (80 + i*50) + 'ms' : '0ms'); };
+$('#menuBtn').onclick = () => setMenu(!mnav.classList.contains('open'));
+mnav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+if ('IntersectionObserver' in window) {
+  const navIo = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) $$('nav.links a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + en.target.id)); }), { rootMargin:'-45% 0px -50% 0px' });
+  ['about','gallery','amenities','save','location','book','top'].forEach(id => { const s = document.getElementById(id); if (s) navIo.observe(s); });
+}
+
+// reveal on scroll
+const countUp = b => { const m = b.textContent.match(/^(\d+)(.*)$/); if (!m || still) return; const end = +m[1], suf = m[2], t0 = performance.now(), d = 1200;
+  const step = t => { const p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(end * e) + suf; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(en => { const el = en.target; el.classList.toggle('in', en.isIntersecting); }), { threshold:0, rootMargin:'-6% 0px -10% 0px' }) : null;
+const stagger = el => { const sib = [...el.parentElement.children].filter(c => c.classList.contains('rv')); return sib.length > 1 ? (sib.indexOf(el) % 4) * 90 : 0; };
+const autoTag = () => $$('main, section:not(.hero) .kicker, section:not(.hero) .h2, section:not(.hero) .lead, section:not(.hero) .btn, .about-text p, .dist li, footer .fgrid > div').forEach(el => { if (!el.closest('.rv') && !el.closest('.pg')) el.classList.add('rv'); });
+window.observeRv = () => { autoTag(); return _obs(); };
+const _obs = () => $$('.rv:not(.in)').forEach(el => { if (io) { io.observe(el); } else el.classList.add('in'); });
+observeRv();
+
+// booking modal
+(() => {
+  const bm = $('#bm'), rooms = C.rooms && C.rooms.length ? C.rooms : [{ name:C.unitName || C.name, guests:C.guests, price:C.priceFrom }];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  const S = { r:0, a:null, b:null, g:2, m:new Date(today.getFullYear(), today.getMonth(), 1), err:'' };
+  const booked = d => { const s = iso(d); return (C.bookedDates || []).some(([x,y]) => s >= x && s < y); };
+  const fmt = d => d ? d.toLocaleDateString(LOCALE[lang], { weekday:'short', day:'numeric', month:'short' }) : T('bkAdd');
+  const nights = () => S.a && S.b ? Math.round((S.b - S.a) / 864e5) : 0;
+  function month(base){
+    const y = base.getFullYear(), m = base.getMonth(), first = (new Date(y,m,1).getDay() + 6) % 7, days = new Date(y,m+1,0).getDate();
+    const wd = [...Array(7)].map((_,i) => '<span class="wd">' + new Date(2024,0,1+i).toLocaleDateString(LOCALE[lang], { weekday:'short' }) + '</span>').join('');
+    let cells = '<span></span>'.repeat(first);
+    for (let d = 1; d <= days; d++) {
+      const dt = new Date(y,m,d), t = +dt; let c = '';
+      if (dt < today) c = 'past'; else if (booked(dt)) c = 'bk';
+      if (S.a && t === +S.a || S.b && t === +S.b) c = 'sel'; else if (S.a && S.b && t > S.a && t < S.b) c = 'rg';
+      cells += '<button type="button" class="' + c + '" data-d="' + iso(dt) + '"' + (c === 'past' || c === 'bk' ? ' disabled' : '') + '>' + d + '</button>';
+    }
+    const title = base.toLocaleDateString(LOCALE[lang], { month:'long', year:'numeric' });
+    return '<div class="cal-m"><h4>' + title.charAt(0).toUpperCase() + title.slice(1) + '</h4><div class="cal-g">' + wd + cells + '</div></div>';
+  }
+  function render(){
+    const R = rooms[S.r]; if (S.g > R.guests) S.g = R.guests;
+    $('#bmRooms').innerHTML = rooms.map((r,i) => '<button type="button" class="bm-room' + (i === S.r ? ' on' : '') + '" data-r="' + i + '"><b>' + esc(tr(r.name)) + '</b><span>' + T('bkUpTo', { n:r.guests }) + ' · ' + money(r.price) + ' ' + T('perNight') + '</span></button>').join('');
+    $('#bmIn span').textContent = fmt(S.a); $('#bmOut span').textContent = fmt(S.b);
+    $('#bmIn').classList.toggle('act', !S.a || !!S.b); $('#bmOut').classList.toggle('act', !!S.a && !S.b);
+    $('#calHint').textContent = S.a && !S.b ? T('bkPickOut') : T('bkPickIn');
+    $('#calMs').innerHTML = month(S.m) + month(new Date(S.m.getFullYear(), S.m.getMonth()+1, 1));
+    $('#calPrev').disabled = S.m <= new Date(today.getFullYear(), today.getMonth(), 1);
+    $('#bmErr').textContent = S.err;
+    $('#gNum').textContent = S.g; $('#gMinus').disabled = S.g <= 1; $('#gPlus').disabled = S.g >= R.guests;
+    const n = nights();
+    if (n) { const tot = n * R.price, plat = tot * (1 + C.platformCommission); $('#bmSum').innerHTML = '<span>' + T('bkNights', { n }) + ' · ' + esc(tr(R.name)) + '</span><b>' + money(tot) + '</b><small>' + T('bkSave', { s:money(plat - tot) }) + '</small>'; $('#bmSum').style.display = ''; }
+    else $('#bmSum').style.display = 'none';
+  }
+  bm.addEventListener('click', e => {
+    if (e.target === bm) return close();
+    const r = e.target.closest('[data-r]'); if (r) { S.r = +r.dataset.r; render(); return; }
+    const b = e.target.closest('.cal-g button[data-d]'); if (!b || b.disabled) return;
+    const [y,m,d] = b.dataset.d.split('-').map(Number), dt = new Date(y,m-1,d); S.err = '';
+    if (!S.a || S.b || dt <= S.a) { S.a = dt; S.b = null; }
+    else { let bad = false; for (let x = new Date(S.a); x < dt; x.setDate(x.getDate()+1)) if (booked(x)) bad = true;
+      if (bad) S.err = T('bkErrBooked'); else S.b = dt; }
+    render();
+  });
+  $('#bmIn').onclick = () => { S.a = null; S.b = null; S.err = ''; render(); };
+  $('#bmOut').onclick = () => { if (S.a) { S.b = null; render(); } };
+  $('#calPrev').onclick = () => { S.m = new Date(S.m.getFullYear(), S.m.getMonth()-1, 1); render(); };
+  $('#calNext').onclick = () => { S.m = new Date(S.m.getFullYear(), S.m.getMonth()+1, 1); render(); };
+  $('#gMinus').onclick = () => { S.g--; render(); };
+  $('#gPlus').onclick = () => { S.g++; render(); };
+  const text = () => { const R = rooms[S.r], msg = $('#bmMsg').value.trim(), n = nights();
+    return [T('waIntro', { villa:C.name }), '', T('bkRoom') + ': ' + tr(R.name), T('waArrival') + ': ' + fmt(S.a), T('waDeparture') + ': ' + fmt(S.b) + ' (' + T('bkNights', { n }) + ')', T('waGuests') + ': ' + S.g, T('waName') + ': ' + $('#bmName').value.trim(), $('#bmMail').value.trim() ? 'Email: ' + $('#bmMail').value.trim() : '', msg ? T('waMsg') + ': ' + msg : ''].filter(Boolean).join('\n'); };
+  const ok = () => { const e2 = $('#bmErr2'); e2.textContent = !S.a || !S.b ? T('bkNeedDates') : !$('#bmName').value.trim() ? T('errName') : ''; return !e2.textContent; };
+  $('#bmWa').onclick = () => { if (ok()) window.open(wa(text()), '_blank', 'noopener'); };
+  $('#bmEm').onclick = () => { if (ok()) location.href = 'mailto:' + C.email + '?subject=' + encodeURIComponent(T('bkTitle') + ' — ' + C.name) + '&body=' + encodeURIComponent(text()); };
+  const open = () => { render(); bm.classList.add('open'); bm.scrollTop = 0; document.body.style.overflow = 'hidden'; };
+  const close = () => { bm.classList.remove('open'); document.body.style.overflow = ''; };
+  $('#bmX').onclick = close;
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && bm.classList.contains('open')) close(); });
+  document.addEventListener('click', e => { const a = e.target.closest('a[href="#book"], a.wa-float'); if (!a || a.classList.contains('wa-float')) return; e.preventDefault(); if (location.hash === '#photos') history.replaceState(null, '', location.pathname); window.dispatchEvent(new Event('hashchange')); open(); }, true);
+  window.renderBk = render;
+})();
+})();
+</script>
+<script>
+if (!CONFIG.email) ['#mailBtn','#mailTxt','#bmEm'].forEach(s=>{const el=document.querySelector(s); if(el) el.style.display='none';});
+if (!CONFIG.email) { const f=document.querySelector('#fMail'); if(f && f.parentElement) f.parentElement.style.display='none'; }
+</script>
+</body>
+</html>
